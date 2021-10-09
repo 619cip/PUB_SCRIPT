@@ -2,10 +2,6 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-if game.PlaceId ~= 2753915549 then
-return
-end
-
 local UserInput = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local my_file
