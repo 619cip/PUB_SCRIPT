@@ -409,7 +409,9 @@ UserInput.InputBegan:Connect(function(input, gameProcessed)
         elseif input.KeyCode == Enum.KeyCode.RightControl then
             ScreenGui.Enabled = not ScreenGui.Enabled
         elseif input.KeyCode == Enum.KeyCode.RightAlt then
-            delfile("NotSameServers.JSON")
+            if isfile("NotSameServers.JSON") then
+                delfile("NotSameServers.JSON")
+            end
             writefile("Kwear-"..game:GetService("Players").LocalPlayer.Name..".STATS", HttpService:JSONEncode({
                 ["Enabled"] = {
                     ["On"] = my_file["Enabled"]["On"],
