@@ -374,7 +374,7 @@ function start_farm()
             collect_fruit(v)
         end
     end
-    wait(5)
+
     server_hop()
 end
 
@@ -406,8 +406,6 @@ UserInput.InputBegan:Connect(function(input, gameProcessed)
             update_file()
         elseif input.KeyCode == Enum.KeyCode.RightControl then
             ScreenGui.Enabled = not ScreenGui.Enabled
-        elseif input.KeyCode == Enum.KeyCode.RightAlt then
-            delfile("Kwear-"..game:GetService("Players").LocalPlayer.Name..".STATS")
         end
     end
 end)
