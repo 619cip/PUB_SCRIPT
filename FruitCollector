@@ -350,6 +350,7 @@ function server_hop()
     function Teleport()
         while wait() do
             pcall(function()
+                CurrentStatus.Text = "Server hopping"
                 TPReturner()
                 if foundAnything ~= "" then
                     TPReturner()
@@ -357,7 +358,6 @@ function server_hop()
             end)
         end
     end
-    CurrentStatus.Text = "Server hopping"
     my_file["Servers"] = tonumber(my_file["Servers"]) + 1
     update_file()
     Teleport()
