@@ -283,9 +283,11 @@ function collect_fruit(tool)
     end
 end
 function server_hop()
-    local server_seeds = game:GetService("HttpService"):JSONDecode(readfile("NotSameServers.JSON"))
-    if tonumber(table.getn(server_seeds)) >= 300 then
-        delfile("NotSameServers.JSON")
+    if isfile("NotSameServers.JSON") then
+        local server_seeds = game:GetService("HttpService"):JSONDecode(readfile("NotSameServers.JSON"))
+        if tonumber(table.getn(server_seeds)) >= 300 then
+            delfile("NotSameServers.JSON")
+        end
     end
     local PlaceID = game.PlaceId
     local AllIDs = {}
@@ -374,7 +376,7 @@ function start_farm()
             collect_fruit(v)
         end
     end
-
+    wait(3)
     server_hop()
 end
 
@@ -406,6 +408,22 @@ UserInput.InputBegan:Connect(function(input, gameProcessed)
             update_file()
         elseif input.KeyCode == Enum.KeyCode.RightControl then
             ScreenGui.Enabled = not ScreenGui.Enabled
+        elseif input.KeyCode == Enum.KeyCode.RightAlt then
+            delfile("NotSameServers.JSON")
+            writefile("Kwear-"..game:GetService("Players").LocalPlayer.Name..".STATS", HttpService:JSONEncode({
+                ["Enabled"] = {
+                    ["On"] = my_file["Enabled"]["On"],
+                    ["Time"] = nil
+                },
+                ["Total"] = 0,
+                ["Servers"] = 0,
+                ["New"] = 0
+            }))
+            my_file = HttpService:JSONDecode(readfile("Kwear-"..game:GetService("Players").LocalPlayer.Name..".STATS"))
+            Clock.Text = "00:00:00"
+            TotalFruit.Text = my_file["Total"]
+            Hopped.Text = my_file["Servers"]
+            NewFruit.Text = my_file["New"]
         end
     end
 end)
